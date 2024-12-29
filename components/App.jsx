@@ -10,6 +10,7 @@ export default function App() {
   return (
     <Contextapi>
       <Header />
+      <Startpage />
       <BrowserRouter basename='/Quiz-App'>
         <Routes>
           <Route path='/' element={<Startpage />} />
