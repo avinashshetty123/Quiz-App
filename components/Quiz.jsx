@@ -42,7 +42,7 @@ const {Correct,Incorrect,Setcorrect,SetIncorrect}=useContext(MyContext)
     }
   };
 
-  // Destructuring the options from props
+
   const [Option1, Option2, Option3, Option4] = props.options;
 
   return (
@@ -62,7 +62,7 @@ const {Correct,Incorrect,Setcorrect,SetIncorrect}=useContext(MyContext)
 
       <div className="mcq_container flex flex-col">
         <div className="button_container grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:gap-8 sm:p-8 mx-auto mt-10 max-w-4xl disabled">
-          {/* Render options as buttons */}
+
           <button
             className={`border-2 border-green-500 h-11 rounded-3xl text-center min-w-72 sm:text-xs text-sm font-semibold cursor-pointer hover:border-red-300 ${
               isanswered

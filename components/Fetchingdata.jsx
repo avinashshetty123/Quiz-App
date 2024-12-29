@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 import Quiz from "./Quiz";
 import Shimmer from "./Shimmer";
 
@@ -51,7 +51,7 @@ export default function FetchQuiz() {
         options={options[currentIndex]}
         correctanswer={correctanswer}
       />
-      {/* Add the Link to the Result page if all questions have been answered */}
+      
       {currentIndex === questions.length - 1 && (
         <Link to="/Result">
           <div className="flex items-center justify-center">

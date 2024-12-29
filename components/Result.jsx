@@ -10,7 +10,7 @@ function Result() {
   const totalQuestions = 50;
   const skipped = totalQuestions - Correct - Incorrect;
 
-  // Data for the Doughnut chart
+
   const data = {
     labels: ['Correct Answers', 'Incorrect Answers', 'Skipped'],
     datasets: [
@@ -39,15 +39,13 @@ function Result() {
 
   const [showConfetti, setShowConfetti] = useState(false);
   useEffect(() => {
-    // Set confetti to true when the page loads
+ 
     setShowConfetti(true);
 
-    // Optionally, stop the confetti after a certain period of time
     const timer = setTimeout(() => {
       setShowConfetti(false);
-    }, 5000); // Stop after 5 seconds
+    }, 5000); 
 
-    // Cleanup the timer when the component is unmounted
     return () => clearTimeout(timer);
   }, []);
 
