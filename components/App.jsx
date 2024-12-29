@@ -12,7 +12,7 @@ export default function App() {
       <Header />
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Startpage />} />
+          <Route path='/Quiz-App' element={<Startpage />} />
           <Route path='/Quiz' element={<FetchQuiz />} />
           <Route path='/Result' element={<Result />} />
         </Routes>
