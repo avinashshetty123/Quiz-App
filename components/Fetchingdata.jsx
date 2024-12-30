@@ -8,14 +8,24 @@ export default function FetchQuiz() {
   const [currentIndex, setCurrentIndex] = useState(0); 
 
   useEffect(() => {
-    fetch(
-      `https://opentdb.com/api.php?amount=50&category=18&difficulty=medium&type=multiple`
-    )
-      .then((res) => res.json())
-      .then((data) => setQuestions(data.results))
-      .catch((err) => console.log(err));
+    const fetchQuestions = async () => {
+      try {
+        const response = await fetch(
+          `https://opentdb.com/api.php?amount=50&category=18&difficulty=medium&type=multiple`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setQuestions(data.results);
+      } catch (error) {
+        console.error("Failed to fetch questions:", error);
+      }
+    };
+  
+    fetchQuestions();
   }, []);
-
+  
   if (questions.length === 0) {
     return <Shimmer />;
   }
