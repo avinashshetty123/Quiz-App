@@ -4,8 +4,9 @@ import Quiz from "./Quiz";
 import Shimmer from "./Shimmer";
 
 export default function FetchQuiz() {
-  const [questions, setQuestions] = useState([]); 
-  const [currentIndex, setCurrentIndex] = useState(0); 
+  const [questions, setQuestions] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [answered, setAnswered] = useState({});
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -22,20 +23,19 @@ export default function FetchQuiz() {
         console.error("Failed to fetch questions:", error);
       }
     };
-  
+
     fetchQuestions();
   }, []);
-  
+
   if (questions.length === 0) {
     return <Shimmer />;
   }
 
-  let options = questions.map((ques) => [
+  const options = questions.map((ques) => [
     ques.correct_answer,
     ...ques.incorrect_answers,
   ]);
   options[currentIndex].sort(() => Math.random() - 0.5);
-  console.log(options[currentIndex]);
 
   const nextQuestion = () => {
     if (currentIndex < questions.length - 1) {
@@ -43,30 +43,38 @@ export default function FetchQuiz() {
     }
   };
 
-  const PrevQuestion = () => {
+  const prevQuestion = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
     }
   };
 
-  const correctanswer = questions[currentIndex].correct_answer;
-  console.log(correctanswer);
+  const handleAnswered = () => {
+    setAnswered((prev) => ({
+      ...prev,
+      [currentIndex]: true,
+    }));
+  };
+
+  const correctAnswer = questions[currentIndex].correct_answer;
 
   return (
     <div>
       <Quiz
         ques={questions[currentIndex]?.question}
         next={nextQuestion}
-        prev={PrevQuestion}
+        prev={prevQuestion}
         options={options[currentIndex]}
-        correctanswer={correctanswer}
+        correctAnswer={correctAnswer}
+        handleAnswered={handleAnswered}
+        isAnswered={answered[currentIndex] || false}
       />
-      
       {currentIndex === questions.length - 1 && (
         <Link to="/Result">
           <div className="flex items-center justify-center">
-            
-          <button className="text-xl border-4 bg-yellow-300 hover:shadow-lg hover:bg-yellow-600 rounded-xl">Go to Results</button>
+            <button className="text-xl border-4 bg-yellow-300 hover:shadow-lg hover:bg-yellow-600 rounded-xl">
+              Go to Results
+            </button>
           </div>
         </Link>
       )}
